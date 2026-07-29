@@ -19,7 +19,7 @@ server:
 
 search:
   safesearch: ${SAFESEARCH}
-  autocomplete: "${AUTOCOMPLETE}"
+  autocomplete: duckduckgo
   formats:
     - html
     - json
