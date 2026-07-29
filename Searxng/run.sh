@@ -14,7 +14,7 @@ fi
 
 BASE_URL=$(python3 -c "import json; print(json.load(open('$OPTIONS_FILE'))['base_url'])")
 INSTANCE_NAME=$(python3 -c "import json; print(json.load(open('$OPTIONS_FILE'))['instance_name'])")
-SECRET_KEY=$(python3 -c "import json; print(json.load(open('$OPTIONS_FILE'))['secret_key'])")
+SECRET_KEY=$(python3 -c "import json; print(json.load(open('$OPTIONS_FILE')).get('secret_key', ''))")
 
 if [ -z "$SECRET_KEY" ] || [ "$SECRET_KEY" = "None" ] || [ "$SECRET_KEY" = "null" ]; then
   if [ -f "$SECRET_FILE" ]; then
