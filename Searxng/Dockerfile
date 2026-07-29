@@ -10,6 +10,6 @@ COPY settings.yml.template /settings.yml.template
 RUN sed -i 's/\r$//' /run.sh && \
     chmod 755 /run.sh
 
-RUN ls -la /run.sh && head -n 1 /run.shbu
+RUN ls -la /run.sh && head -n 1 /run.sh
 
-ENTRYPOINT ["/run.sh"]
+ENTRYPOINT ["/bin/sh", "/run.sh"]
