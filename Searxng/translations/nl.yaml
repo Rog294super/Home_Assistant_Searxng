@@ -1,0 +1,59 @@
+configuration:
+  base_url:
+    name: Basis-URL
+    description: Publieke URL waarop deze SearXNG-instantie bereikbaar is.
+
+  instance_name:
+    name: Naam van instantie
+    description: Naam die binnen SearXNG wordt weergegeven.
+
+  autocomplete:
+    name: Automatisch aanvullen
+    description: Provider voor zoeksuggesties.
+
+  safesearch:
+    name: SafeSearch
+    description: SafeSearch-niveau (0 = Uit, 1 = Gemiddeld, 2 = Strikt).
+
+  image_proxy:
+    name: Afbeeldingsproxy
+    description: Laad afbeeldingen via SearXNG.
+
+  engines:
+    name: Zoekmachines
+
+  engines.google:
+    name: Google
+
+  engines.bing:
+    name: Bing
+
+  engines.duckduckgo:
+    name: DuckDuckGo
+
+  engines.brave:
+    name: Brave Search
+
+  engines.startpage:
+    name: Startpage
+
+  engines.qwant:
+    name: Qwant
+
+  engines.wikipedia:
+    name: Wikipedia
+
+  engines.github:
+    name: GitHub
+
+  engines.youtube:
+    name: YouTube
+
+  engines.reddit:
+    name: Reddit
+
+  engines.stackoverflow:
+    name: Stack Overflow
+
+  engines.wolframalpha:
+    name: WolframAlpha

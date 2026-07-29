@@ -1,0 +1,61 @@
+configuration:
+  base_url:
+    name: Base URL
+    description: >
+      The public URL where your SearXNG instance can be reached.
+      Example: https://searxng.local
+
+  instance_name:
+    name: Instance name
+    description: Name displayed by SearXNG.
+
+  autocomplete:
+    name: Autocomplete provider
+    description: Provider used for search suggestions.
+
+  safesearch:
+    name: SafeSearch
+    description: SafeSearch level (0 = Off, 1 = Moderate, 2 = Strict).
+
+  image_proxy:
+    name: Image proxy
+    description: Proxy remote images through SearXNG.
+
+  engines:
+    name: Search engines
+
+  engines.google:
+    name: Google
+
+  engines.bing:
+    name: Bing
+
+  engines.duckduckgo:
+    name: DuckDuckGo
+
+  engines.brave:
+    name: Brave Search
+
+  engines.startpage:
+    name: Startpage
+
+  engines.qwant:
+    name: Qwant
+
+  engines.wikipedia:
+    name: Wikipedia
+
+  engines.github:
+    name: GitHub
+
+  engines.youtube:
+    name: YouTube
+
+  engines.reddit:
+    name: Reddit
+
+  engines.stackoverflow:
+    name: Stack Overflow
+
+  engines.wolframalpha:
+    name: WolframAlpha
