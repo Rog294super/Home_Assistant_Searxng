@@ -1,4 +1,4 @@
-#!/usr/bin/env bash
+#!/usr/bin/with-contenv bashio
 set -e
 
 OPTIONS_FILE=/data/options.json
@@ -13,9 +13,9 @@ if [ ! -f "$OPTIONS_FILE" ]; then
   exit 1
 fi
 
-BASE_URL=$(jq -r '.base_url' "$OPTIONS_FILE")
-INSTANCE_NAME=$(jq -r '.instance_name' "$OPTIONS_FILE")
-SECRET_KEY=$(jq -r '.secret_key // ""' "$OPTIONS_FILE")
+BASE_URL=$(bashio::config 'base_url')
+INSTANCE_NAME=$(bashio::config 'instance_name')
+SECRET_KEY=$(bashio::config 'secret_key')
 
 # Keep the secret_key stable across restarts instead of regenerating it
 # every boot, unless the user has explicitly set one in the options.
@@ -30,7 +30,11 @@ if [ -z "$SECRET_KEY" ] || [ "$SECRET_KEY" == "null" ]; then
 fi
 
 export BASE_URL INSTANCE_NAME SECRET_KEY
-envsubst < /settings.yml.template > "$SETTINGS_FILE"
+sed \
+  -e "s|\${BASE_URL}|${BASE_URL}|g" \
+  -e "s|\${INSTANCE_NAME}|${INSTANCE_NAME}|g" \
+  -e "s|\${SECRET_KEY}|${SECRET_KEY}|g" \
+  /settings.yml.template > "$SETTINGS_FILE"
 
 # Turn the engines.* switches from the HA options UI into a settings.yml
 # `engines:` override list. Because the template above sets
@@ -41,12 +45,21 @@ envsubst < /settings.yml.template > "$SETTINGS_FILE"
 # IMPORTANT: each key below must exactly match an engine's `name:` field
 # in SearXNG's own default settings.yml (case-sensitive, and some engines
 # use spaces, e.g. "google images"). See DOCS.md for how to verify names.
-ENGINES_YAML=$(jq -r '
-  .engines
-  | to_entries
-  | map("  - name: \"" + .key + "\"\n    disabled: " + (if .value then "false" else "true" end))
-  | join("\n")
-' "$OPTIONS_FILE")
+ENGINES_YAML=""
+
+for engine in google bing duckduckgo brave startpage qwant wikipedia github youtube reddit stackoverflow wolframalpha; do
+  enabled=$(bashio::config "engines.${engine}")
+
+  if [ "$enabled" = "true" ]; then
+    disabled="false"
+  else
+    disabled="true"
+  fi
+
+  ENGINES_YAML="${ENGINES_YAML}  - name: \"${engine}\"
+    disabled: ${disabled}
+"
+done
 
 {
   echo ""
