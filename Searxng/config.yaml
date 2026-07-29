@@ -53,19 +53,7 @@ options:
 schema:
   base_url: str
   instance_name: str
-
-  autocomplete:
-    name: Autocomplete provider
-    description: Select the autocomplete provider used by SearXNG.
-    selector:
-        select:
-        options:
-          - duckduckgo
-          - google
-          - brave
-          - startpage
-          - qwant
-          - wikipedia
+  autocomplete: str
   safesearch: int(0,2)
   image_proxy: bool
 
