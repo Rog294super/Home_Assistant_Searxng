@@ -4,6 +4,8 @@
 # FROM line resolves correctly on amd64/aarch64/armv7 hosts.
 FROM searxng/searxng:latest
 
+
+RUN cat /etc/os-release
 # jq: parse /data/options.json (the values you set in the HA add-on UI)
 # gettext: gives us envsubst for templating settings.yml
 RUN apk add --no-cache jq gettext
