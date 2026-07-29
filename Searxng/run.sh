@@ -13,9 +13,9 @@ if [ ! -f "$OPTIONS_FILE" ]; then
   exit 1
 fi
 
-BASE_URL=$(bashio::config 'base_url')
-INSTANCE_NAME=$(bashio::config 'instance_name')
-SECRET_KEY=$(bashio::config 'secret_key')
+BASE_URL=$(python3 -c "import json; print(json.load(open('/data/options.json'))['base_url'])")
+INSTANCE_NAME=$(python3 -c "import json; print(json.load(open('/data/options.json'))['instance_name'])")
+SECRET_KEY=$(python3 -c "import json; print(json.load(open('/data/options.json'))['secret_key'])")
 
 # Keep the secret_key stable across restarts instead of regenerating it
 # every boot, unless the user has explicitly set one in the options.

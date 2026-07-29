@@ -7,8 +7,9 @@ FROM searxng/searxng:latest
 COPY run.sh /run.sh
 COPY settings.yml.template /settings.yml.template
 
-RUN chmod +x /run.sh
+RUN sed -i 's/\r$//' /run.sh && \
+    chmod 755 /run.sh
 
-RUN find / -type f -executable -name '*searx*' 2>/dev/null
+RUN ls -la /run.sh && head -n 1 /run.shbu
 
 ENTRYPOINT ["/run.sh"]
