@@ -33,7 +33,7 @@ those names at your Home Assistant host's IP. Since you're already running
 2. Domain: `searxng.lan` → IP: your HA host's LAN IP
 3. Repeat for `searxng.local` → same IP
 
-Then browse to `http://searxng.lan:8080/`.
+Then browse to `http://searxng.lan:8080/` or 'http://searxng.local:8080' or use after one visit the open webgui through apps menu.
 
 **Caveat on `.local` from Windows clients:** Windows treats `.local` as an
 mDNS/LLMNR suffix by default and may try to resolve it via multicast on the
@@ -47,8 +47,7 @@ specific host.
 **No clean port-80 URL out of the box:** SearXNG's image listens on 8080
 internally, and `host_network` just forwards that straight through, so the
 URL includes `:8080`. If you want a bare `http://searxng.lan/` with no
-port, put it behind the same nginx reverse proxy you're already using for
-Nextcloud/Collabora, proxying `searxng.lan:80` → `127.0.0.1:8080`.
+port, put it behind a nginx reverse proxy or another reverse proxy `searxng.lan:80` → `127.0.0.1:8080` or 'LAN-IP:8080'.
 
 ## Verifying engine names
 
@@ -69,11 +68,3 @@ Add new engines by adding more `key: true/false` pairs under both
 `options.engines` and `schema.engines` in `config.yaml` — the name just
 needs to match what you find there.
 
-## Security note
-
-`host_network: true` means SearXNG isn't sandboxed behind HA's ingress
-auth — anything that can reach your LAN on port 8080 can reach it
-directly. That's the same trust model as your other host-network services;
-if you want it reachable over Tailscale only, don't forward the port on
-your router and rely on your existing Tailscale ACLs the way you do for
-Nextcloud.
