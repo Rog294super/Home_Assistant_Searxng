@@ -64,4 +64,4 @@ export SEARXNG_SETTINGS_PATH="$SETTINGS_FILE"
 
 echo "[searxng-addon] Starting SearXNG"
 
-exec python3 -m searx.webapp
+exec /usr/local/searxng/.venv/bin/python -m searx.webapp
