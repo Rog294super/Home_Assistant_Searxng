@@ -1,0 +1,64 @@
+name: "SearXNG"
+version: "1.0.0"
+slug: "searxng"
+description: "Privacy-respecting metasearch engine, reachable at your own LAN hostname instead of through HA ingress"
+url: "https://github.com/searxng/searxng"
+arch:
+  - aarch64
+  - amd64
+  - armv7
+init: false
+
+# host_network is the key setting that gets you away from the
+# "homeassistant.local:8123/api/hassio_ingress/xxxx/" style path.
+# The container shares the host's network stack directly, so SearXNG
+# is reachable at <host-ip>:8080 with no HA path prefix at all.
+host_network: true
+
+# Convenience "open web ui" link shown on the add-on's info page in HA.
+webui: "http://[HOST]:8080/"
+
+boot: auto
+startup: services
+
+# /data is the persistent storage HA gives every add-on. We use it to
+# remember the auto-generated secret_key across restarts/updates.
+map:
+  - addon_config:rw
+  - data:rw
+
+options:
+  base_url: "http://searxng.local/"
+  instance_name: "SearXNG"
+  secret_key: ""
+  engines:
+    google: true
+    bing: true
+    duckduckgo: true
+    brave: false
+    startpage: false
+    qwant: false
+    wikipedia: true
+    github: true
+    youtube: true
+    reddit: false
+    stackoverflow: true
+    wolframalpha: false
+
+schema:
+  base_url: str
+  instance_name: str
+  secret_key: str?
+  engines:
+    google: bool
+    bing: bool
+    duckduckgo: bool
+    brave: bool
+    startpage: bool
+    qwant: bool
+    wikipedia: bool
+    github: bool
+    youtube: bool
+    reddit: bool
+    stackoverflow: bool
+    wolframalpha: bool
