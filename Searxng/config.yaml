@@ -30,7 +30,11 @@ map:
 options:
   base_url: "http://searxng.local/"
   instance_name: "SearXNG"
-  secret_key: ""
+
+  autocomplete: duckduckgo
+  safesearch: 0
+  image_proxy: true
+
   engines:
     google: true
     bing: true
@@ -48,7 +52,11 @@ options:
 schema:
   base_url: str
   instance_name: str
-  secret_key: str?
+
+  autocomplete: list(duckduckgo,google,brave,startpage,qwant,wikipedia)?
+  safesearch: int(0,2)
+  image_proxy: bool
+
   engines:
     google: bool
     bing: bool

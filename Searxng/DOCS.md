@@ -23,14 +23,14 @@ Building happens on-device from the Dockerfile, so first install will take some 
 
 `host_network: true` in `config.yaml` puts the container directly on your
 LAN — it does not create the hostname for you. You still need DNS to point
-those names at your Home Assistant host's IP. Since you're already running
+those names at your Home Assistant host's IP. If you're already running
 **AdGuard Home** as a HAOS add-on, the easiest path is DNS rewrites there:
 
 1. AdGuard Home → **Filters → DNS rewrites → Add**
 2. Domain: `searxng.lan` → IP: your HA host's LAN IP
 3. Repeat for `searxng.local` → same IP
 
-Then browse to `http://searxng.lan:8080/` or `http://searxng.local:8080` or use after one visit the open webgui through apps menu.
+Then browse to `http://searxng.lan:8080/`, `http://searxng.local:8080` or use the open webgui through apps menu.
 
 **Caveat on `.local` from Windows clients:** Windows treats `.local` as an
 mDNS/LLMNR suffix by default and may try to resolve it via multicast on the
@@ -44,7 +44,7 @@ specific host.
 **No clean port-80 URL out of the box:** SearXNG's image listens on 8080
 internally, and `host_network` just forwards that straight through, so the
 URL includes `:8080`. If you want a bare `http://searxng.lan/` with no
-port, put it behind a nginx reverse proxy or another reverse proxy `searxng.lan:80` → `127.0.0.1:8080` or 'LAN-IP:8080'.
+port, put it behind a nginx reverse proxy or another reverse proxy `searxng.lan:8080` or `searxng.local`→ `127.0.0.1:8080` or `LAN-IP:8080`.
 
 ## Verifying engine names
 
