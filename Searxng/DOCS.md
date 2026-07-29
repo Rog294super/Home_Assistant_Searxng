@@ -10,17 +10,14 @@ A self-built Home Assistant add-on for SearXNG that:
 
 ## Installing it
 
-1. Copy this whole `addon/` folder onto your HAOS host at
-   `/addons/searxng/` (rename the folder to `searxng` when you copy it —
-   e.g. via the Samba share add-on or `ha` CLI over SSH).
+1. Install the app through adding the URL: `https://github.com/Rog294super/Home_Assistant_Searxng` to repositories at **Settings → Add-ons → Add-on Store → : → Repositories → ADD button bottom right **,
 2. In HA: **Settings → Add-ons → Add-on Store → ⋮ → Check for updates**,
    then scroll down to **Local add-ons** — SearXNG should appear there.
 3. Install, set your engine switches under **Configuration**, then **Start**.
 4. Check the **Log** tab — it prints the generated `settings.yml` on every
    boot, so you can confirm your toggles actually took effect.
 
-Building happens on-device from the Dockerfile, so first install will take
-a few minutes on a Raspberry Pi–class host.
+Building happens on-device from the Dockerfile, so first install will take some time possible on lower power devices.
 
 ## Getting `searxng.lan` / `searxng.local` working
 
@@ -33,7 +30,7 @@ those names at your Home Assistant host's IP. Since you're already running
 2. Domain: `searxng.lan` → IP: your HA host's LAN IP
 3. Repeat for `searxng.local` → same IP
 
-Then browse to `http://searxng.lan:8080/` or 'http://searxng.local:8080' or use after one visit the open webgui through apps menu.
+Then browse to `http://searxng.lan:8080/` or `http://searxng.local:8080` or use after one visit the open webgui through apps menu.
 
 **Caveat on `.local` from Windows clients:** Windows treats `.local` as an
 mDNS/LLMNR suffix by default and may try to resolve it via multicast on the
