@@ -10,7 +10,7 @@ A self-built Home Assistant add-on for SearXNG that:
 
 ## Installing it
 
-1. Install the app through adding the URL: `https://github.com/Rog294super/Home_Assistant_Searxng` to repositories at **Settings → Add-ons → Add-on Store → : → Repositories → ADD button bottom right **,
+1. Install the app through adding the URL: `https://github.com/Rog294super/Home-Assistant-APP-Searxng` to repositories at **Settings → Add-ons → Add-on Store → : → Repositories → ADD button bottom right **,
 2. In HA: **Settings → Add-ons → Add-on Store → ⋮ → Check for updates**,
    then scroll down to **Local add-ons** — SearXNG should appear there.
 3. Install, set your engine switches under **Configuration**, then **Start**.

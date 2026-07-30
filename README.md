@@ -27,6 +27,8 @@ Only Home Assistant specific settings are generated during startup. This means f
 
 ## Installation
 
+[![Open your Home Assistant instance and add this repository](https://my.home-assistant.io/badges/supervisor_add_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_repository/?repository_url=https%3A%2F%2Fgithub.com%2FRog294super%2FHome-Assistant-APP-Searxng)
+
 1. Open **Settings → Add-ons → Add-on Store**.
 2. Add this repository as a custom repository.
 3. Install **SearXNG**.

@@ -1,26 +1,38 @@
 configuration:
   base_url:
     name: Basis-URL
-    description: Publieke URL waarop deze SearXNG-instantie bereikbaar is.
+    description: >
+      De openbare URL waarop je SearXNG-instantie bereikbaar is.
+      Voorbeeld: https://searxng.local
 
   instance_name:
-    name: Naam van instantie
-    description: Naam die binnen SearXNG wordt weergegeven.
+    name: Naam van de instantie
+    description: Naam die door SearXNG wordt weergegeven.
+
+  port:
+    name: Poort
+    description: >
+      Externe poort waarop SearXNG beschikbaar is.
+      Laat een reverse proxy naar deze poort verwijzen.
 
   autocomplete:
-    name: Automatisch aanvullen
+    name: Autocompleteprovider
     description: >
-      Provider voor zoeksuggesties.
-      Bestaande automatisch aanvullen backend "360search", "baidu", "brave", "dbpedia", "google", "yandex",
-      "mwmbl", "naver", "seznam", "sogou", "startpage", "stract", "swisscows", "quark", "qwant", "wikipedia"
+      Provider die wordt gebruikt voor zoeksuggesties.
+      Beschikbare autocomplete-backends zijn:
+      "360search", "baidu", "brave", "dbpedia", "duckduckgo", "google",
+      "yandex", "mwmbl", "naver", "seznam", "sogou", "startpage",
+      "stract", "swisscows", "quark", "qwant" en "wikipedia".
 
   safesearch:
     name: SafeSearch
-    description: SafeSearch-niveau (0 = Uit, 1 = Gemiddeld, 2 = Strikt).
+    description: >
+      SafeSearch-niveau (0 = Uit, 1 = Gemiddeld, 2 = Strikt).
 
   image_proxy:
     name: Afbeeldingsproxy
-    description: Laad afbeeldingen via SearXNG.
+    description: >
+      Laat externe afbeeldingen via SearXNG verlopen.
 
   engines:
     name: Zoekmachines
@@ -47,8 +59,8 @@ configuration:
     name: Wikipedia
 
   engines.wikidata:
-    name: wikidata
-    
+    name: Wikidata
+
   engines.github:
     name: GitHub
 

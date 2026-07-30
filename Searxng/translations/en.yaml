@@ -8,13 +8,21 @@ configuration:
   instance_name:
     name: Instance name
     description: Name displayed by SearXNG.
-
+  
+  port: 
+    name: Port
+    description: >
+      External port SearXNG, 
+      Point reverse proxy to this port.
+  
   autocomplete:
     name: Autocomplete provider
     description: > 
       Provider used for search suggestions.
-      Existing autocomplete backends: "360search", "baidu", "brave", "dbpedia", "google", "yandex",
-      "mwmbl", "naver", "seznam", "sogou", "startpage", "stract", "swisscows", "quark", "qwant", "wikipedia"
+      Existing autocomplete backends: 
+      "360search", "baidu", "brave", "dbpedia", "duckduckgo", "google", 
+      "yandex","mwmbl", "naver", "seznam", "sogou", "startpage", 
+      "stract", "swisscows", "quark", "qwant", "wikipedia"
   
   safesearch:
     name: SafeSearch
