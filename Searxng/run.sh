@@ -62,6 +62,7 @@ sed \
     -e "s|\${BASE_URL}|${BASE_URL}|g" \
     -e "s|\${INSTANCE_NAME}|${INSTANCE_NAME}|g" \
     -e "s|\${SECRET_KEY}|${SECRET_KEY}|g" \
+    -e "s|\${PORT}|${PORT}|g" \
     /settings.yml.template > "$SETTINGS_FILE"
 
 # ---------------------------------------------------------
