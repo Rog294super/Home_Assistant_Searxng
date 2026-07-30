@@ -11,8 +11,11 @@ configuration:
 
   autocomplete:
     name: Autocomplete provider
-    description: Provider used for search suggestions.
-
+    description: > 
+      Provider used for search suggestions.
+      Existing autocomplete backends: "360search", "baidu", "brave", "dbpedia", "google", "yandex",
+      "mwmbl", "naver", "seznam", "sogou", "startpage", "stract", "swisscows", "quark", "qwant", "wikipedia"
+  
   safesearch:
     name: SafeSearch
     description: SafeSearch level (0 = Off, 1 = Moderate, 2 = Strict).
@@ -44,6 +47,9 @@ configuration:
 
   engines.wikipedia:
     name: Wikipedia
+  
+  engines.wikidata:
+    name: wikidata
 
   engines.github:
     name: GitHub

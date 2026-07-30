@@ -9,7 +9,10 @@ configuration:
 
   autocomplete:
     name: Automatisch aanvullen
-    description: Provider voor zoeksuggesties.
+    description: >
+      Provider voor zoeksuggesties.
+      Bestaande automatisch aanvullen backend "360search", "baidu", "brave", "dbpedia", "google", "yandex",
+      "mwmbl", "naver", "seznam", "sogou", "startpage", "stract", "swisscows", "quark", "qwant", "wikipedia"
 
   safesearch:
     name: SafeSearch
@@ -43,6 +46,9 @@ configuration:
   engines.wikipedia:
     name: Wikipedia
 
+  engines.wikidata:
+    name: wikidata
+    
   engines.github:
     name: GitHub
 

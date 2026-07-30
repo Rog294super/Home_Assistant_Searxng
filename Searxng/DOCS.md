@@ -3,7 +3,7 @@
 A self-built Home Assistant add-on for SearXNG that:
 
 - Exposes per-engine on/off switches in the add-on Configuration UI
-- Runs on the host network directly, so it's reachable at `<host-ip>:8080`
+- Runs on the host network directly, so it's reachable at `<host-ip>:<PORT>`
   with **no** `homeassistant.local:8123/api/hassio_ingress/...` path prefix
 - Is meant to sit behind your own `searxng.lan` / `searxng.local` hostnames
   via DNS, not via HA's ingress proxy
@@ -30,7 +30,7 @@ those names at your Home Assistant host's IP. If you're already running
 2. Domain: `searxng.lan` → IP: your HA host's LAN IP
 3. Repeat for `searxng.local` → same IP
 
-Then browse to `http://searxng.lan:8080/`, `http://searxng.local:8080` or use the open webgui through apps menu.
+Then browse to `http://searxng.lan:<PORT>/`, `http://searxng.local:<PORT>` or use the open webgui through apps menu.
 
 **Caveat on `.local` from Windows clients:** Windows treats `.local` as an
 mDNS/LLMNR suffix by default and may try to resolve it via multicast on the
@@ -41,10 +41,10 @@ from a given machine, `searxng.lan` is the more reliable one to standardize
 on — or fall back to true mDNS (Avahi) instead of a DNS rewrite for that
 specific host.
 
-**No clean port-80 URL out of the box:** SearXNG's image listens on 8080
+**No clean port-80 URL out of the box:** SearXNG's image listens on 18080
 internally, and `host_network` just forwards that straight through, so the
-URL includes `:8080`. If you want a bare `http://searxng.lan/` with no
-port, put it behind a nginx reverse proxy or another reverse proxy `searxng.lan:8080` or `searxng.local`→ `127.0.0.1:8080` or `LAN-IP:8080`.
+URL includes `:<PORT>`. If you want a bare `http://searxng.lan/` with no
+port, put it behind a nginx reverse proxy or another reverse proxy `searxng.lan:<PORT>` or `searxng.local`→ `127.0.0.1:<PORT>` or `LAN-IP:<PORT>`.
 
 ## Verifying engine names
 
