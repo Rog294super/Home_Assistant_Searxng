@@ -1,5 +1,7 @@
 # SearXNG Home Assistant Add-on
 
+[![Open your Home Assistant instance and show the add app repository dialog with a specific repository URL pre-filled.](https://my.home-assistant.io/badges/supervisor_add_addon_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_addon_repository/?repository_url=https%3A%2F%2Fgithub.com%2FRog294super%2FHome-Assistant-APP-Searxng)
+
 A Home Assistant OS add-on that runs the official **SearXNG** metasearch engine while staying as close as possible to the upstream project.
 
 This add-on is designed to provide a lightweight, easy-to-maintain integration for Home Assistant users without modifying the core SearXNG application.
@@ -26,8 +28,11 @@ use_default_settings: true
 Only Home Assistant specific settings are generated during startup. This means future SearXNG updates automatically benefit from upstream improvements without requiring large configuration changes inside the add-on.
 
 ## Installation
+Click the button above to add this repository to Home Assistant.
 
-[![Open your Home Assistant instance and add this repository](https://my.home-assistant.io/badges/supervisor_add_repository.svg)](https://my.home-assistant.io/redirect/supervisor_add_repository/?repository_url=https%3A%2F%2Fgithub.com%2FRog294super%2FHome-Assistant-APP-Searxng)
+Alternatively, add the following repository manually:
+
+https://github.com/Rog294super/Home-Assistant-APP-Searxng
 
 1. Open **Settings → Add-ons → Add-on Store**.
 2. Add this repository as a custom repository.
