@@ -8,8 +8,9 @@ All notable changes to this Home Assistant SearXNG App are documented here.
 - Configurable SearXNG port.
 - Configurable autocomplete provider.
 - Additional search-engine configuration.
-- Icon added
-- Changelog added
+- Icon added.
+- Changelog added.
+- Install button README added.
 
 ### Changed
 - Translation changed so as autocomplete.
