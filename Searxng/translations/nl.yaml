@@ -36,6 +36,9 @@ configuration:
 
   engines:
     name: Zoekmachines
+    description: >
+      Engines die hier niet staan maar wel worden gebruikt door searxng settings.yml, 
+      gebruiken default van searxng image.
 
   engines.google:
     name: Google
@@ -46,9 +49,6 @@ configuration:
   engines.duckduckgo:
     name: DuckDuckGo
 
-  engines.brave:
-    name: Brave Search
-
   engines.startpage:
     name: Startpage
 
@@ -57,9 +57,6 @@ configuration:
 
   engines.wikipedia:
     name: Wikipedia
-
-  engines.wikidata:
-    name: Wikidata
 
   engines.github:
     name: GitHub

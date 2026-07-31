@@ -1,67 +1,80 @@
-# SearXNG (local add-on)
+# SearXNG for Home Assistant
 
-A self-built Home Assistant add-on for SearXNG that:
+This app installs SearXNG as a self-hosted search engine for Home Assistant OS or Supervised installations. It is designed to run directly on your host network, expose per-engine switches in the app configuration UI, and be reached through your own local domain names such as `searxng.lan` or `searxng.local` rather than through Home Assistant ingress.
 
-- Exposes per-engine on/off switches in the add-on Configuration UI
-- Runs on the host network directly, so it's reachable at `<host-ip>:<PORT>`
-  with **no** `homeassistant.local:8123/api/hassio_ingress/...` path prefix
-- Is meant to sit behind your own `searxng.lan` / `searxng.local` hostnames
-  via DNS, not via HA's ingress proxy
+## What this app provides
 
-## Installing it
+- Direct access at your Home Assistant host IP and port, without the usual Home Assistant ingress path
+- Simple on/off toggles for individual search engines
+- A local, privacy-friendly alternative to public search services
+- Compatibility with a custom DNS setup or reverse proxy for cleaner URLs
 
-1. Install the app through adding the URL: `https://github.com/Rog294super/Home-Assistant-APP-Searxng` to repositories at **Settings → Add-ons → Add-on Store → : → Repositories → ADD button bottom right **,
-2. In HA: **Settings → Add-ons → Add-on Store → ⋮ → Check for updates**,
-   then scroll down to **Local add-ons** — SearXNG should appear there.
-3. Install, set your engine switches under **Configuration**, then **Start**.
-4. Check the **Log** tab — it prints the generated `settings.yml` on every
-   boot, so you can confirm your toggles actually took effect.
+## Installation
 
-Building happens on-device from the Dockerfile, so first install will take some time possible on lower power devices.
+1. Add this repository URL to your Home Assistant app store:
+   `https://github.com/Rog294super/Home-Assistant-APP-Searxng`
+2. Open Home Assistant and go to **Settings → apps → app Store**.
+3. Use **Check for updates**, then look for **SearXNG** under **Local apps**.
+4. Install the app, configure the engine switches under **Configuration**, and then click **Start**.
+5. Open the **Log** tab to confirm that the generated `settings.yml` was created correctly.
 
-## Getting `searxng.lan` / `searxng.local` working
+The first installation may take some time because the image is built on the device from the included Dockerfile.
 
-`host_network: true` in `config.yaml` puts the container directly on your
-LAN — it does not create the hostname for you. You still need DNS to point
-those names at your Home Assistant host's IP. If you're already running
-**AdGuard Home** as a HAOS add-on, the easiest path is DNS rewrites there:
+## Accessing SearXNG
 
-1. AdGuard Home → **Filters → DNS rewrites → Add**
-2. Domain: `searxng.lan` → IP: your HA host's LAN IP
-3. Repeat for `searxng.local` → same IP
+This app does not create hostnames for you. It runs on the host network, but you still need DNS or local name resolution to make names like `searxng.lan` or `searxng.local` point to your Home Assistant host.
 
-Then browse to `http://searxng.lan:<PORT>/`, `http://searxng.local:<PORT>` or use the open webgui through apps menu.
+### Using AdGuard Home as DNS
 
-**Caveat on `.local` from Windows clients:** Windows treats `.local` as an
-mDNS/LLMNR suffix by default and may try to resolve it via multicast on the
-local segment *before* ever asking AdGuard, so the rewrite can be ignored
-even though it's configured correctly. `searxng.lan` doesn't have this
-problem since `.lan` isn't a reserved multicast TLD. If `.local` is flaky
-from a given machine, `searxng.lan` is the more reliable one to standardize
-on — or fall back to true mDNS (Avahi) instead of a DNS rewrite for that
-specific host.
+If you already run AdGuard Home, the easiest option is to add DNS rewrites:
 
-**No clean port-80 URL out of the box:** SearXNG's image listens on 18080
-internally, and `host_network` just forwards that straight through, so the
-URL includes `:<PORT>`. If you want a bare `http://searxng.lan/` with no
-port, put it behind a nginx reverse proxy or another reverse proxy `searxng.lan:<PORT>` or `searxng.local`→ `127.0.0.1:<PORT>` or `LAN-IP:<PORT>`.
+1. Open **AdGuard Home**.
+2. Go to **Filters → DNS rewrites**.
+3. Add a rewrite for `searxng.lan` pointing to your Home Assistant host LAN IP.
+4. Repeat for `searxng.local`.
 
-## Verifying engine names
+You can then browse to:
 
-Each key under `engines:` in `config.yaml`'s `options` must exactly match
-an engine's `name:` field in SearXNG's own default settings — some have
-spaces (`"google images"`) and are case-sensitive. `google`, `bing`,
-`duckduckgo`, `wikipedia`, `github`, `youtube`, and `reddit` are safe bets
-as-is; double-check `brave`, `startpage`, `qwant`, `stackoverflow`, and
-`wolframalpha` before relying on them. To see the authoritative list for
-the exact image version you're running:
+- `http://searxng.lan:<PORT>/`
+- `http://searxng.local:<PORT>/`
 
-```bash
-docker run --rm --entrypoint cat searxng/searxng:latest /usr/local/searxng/searx/settings.yml \
-  | grep -A1 "name:" | less
-```
+or use the built-in **Open Web UI** option from the app page.
 
-Add new engines by adding more `key: true/false` pairs under both
-`options.engines` and `schema.engines` in `config.yaml` — the name just
-needs to match what you find there.
+### Important note about `.local`
 
+Windows clients often treat `.local` as a reserved multicast name suffix and may try to resolve it via mDNS or LLMNR before consulting your DNS server. This can make `searxng.local` unreliable on some machines. If you run into issues, `searxng.lan` is usually the more dependable choice.
+
+For more background, see this article: [Why using .local as a domain name extension is a bad idea](https://community.veeam.com/blogs-and-podcasts-57/why-using-local-as-your-domain-name-extension-is-a-bad-idea-4828).
+
+## Port and URL notes
+
+The SearXNG container listens internally on port `18080`, and the app exposes that directly through the host network. Because of that, the URL usually includes a port unless you place it behind a reverse proxy.
+
+If you want a cleaner URL such as `http://searxng.lan/`, consider using a reverse proxy such as Nginx or Caddy and forward traffic to your Home Assistant host IP and the SearXNG port.
+
+## Configuring search engines
+
+Each engine toggle in the app configuration must match the engine name used by SearXNG exactly. Some names contain spaces and are case-sensitive, so the value must be an exact match.
+
+Examples that are commonly safe to use include:
+
+- `google`
+- `bing`
+- `duckduckgo`
+- `wikipedia`
+- `github`
+- `youtube`
+- `reddit`
+- `stackoverflow`
+
+Names such as `startpage`, `qwant`, and `wolframalpha` should be double-checked before relying on them.
+
+Engines not named in config.yaml but used by searxng default settings.yml will use their default value.
+
+## Troubleshooting
+
+- If the app starts but the web UI is not reachable, check your firewall rules and confirm that the host network setup is working.
+- ⚠️ If you changed the port to something else then the standard 18080 the web UI button won't work correctly.⚠️
+- If `searxng.local` does not resolve reliably, switch to `searxng.lan`.
+- If an engine does not appear as expected, verify that its name in the configuration exactly matches the engine name in SearXNG.
+- If something looks wrong, review the app logs, which print the generated settings on every boot.
